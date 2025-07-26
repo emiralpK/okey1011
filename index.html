@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okey 101 Scanner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <header class="bg-dark text-white p-3">
+            <h1 class="text-center">Okey 101 Taş Tanıma</h1>
+        </header>
+
+        <main class="container mt-3">
+            <!-- Status and controls -->
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div id="status" class="alert alert-info">Kamera erişimi bekleniyor...</div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12 text-center">
+                    <button id="startBtn" class="btn btn-primary me-2">Başlat</button>
+                    <button id="snapBtn" class="btn btn-success me-2" disabled>Görüntü Yakala</button>
+                    <button id="flipBtn" class="btn btn-secondary">Kamerayı Çevir</button>
+                </div>
+            </div>
+
+            <!-- Video feed and canvas container -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            Kamera Görüntüsü
+                        </div>
+                        <div class="card-body p-0 text-center">
+                            <video id="video" playsinline autoplay muted></video>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            İşlenen Görüntü
+                        </div>
+                        <div class="card-body p-0 text-center">
+                            <canvas id="canvasOutput"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Results panel -->
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            Analiz Sonuçları
+                        </div>
+                        <div class="card-body">
+                            <div id="results" class="text-center">
+                                <h3 id="score">Senin elin: 0 puan</h3>
+                                <div id="detectedTokens" class="mt-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading overlay -->
+            <div id="loadingOverlay" class="loading-overlay">
+                <div class="spinner-border text-light" role="status">
+                    <span class="visually-hidden">Yükleniyor...</span>
+                </div>
+                <div class="mt-2 text-white">OpenCV.js yükleniyor...</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Debug mode toggle -->
+    <div class="position-fixed bottom-0 end-0 p-3">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="debugToggle">
+            <label class="form-check-label" for="debugToggle">Hata Ayıklama</label>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script async src="https://docs.opencv.org/4.7.0/opencv.js" onload="onOpenCvReady();" onerror="onOpenCvError();"></script>
+    <script src="js/boardDetector.js"></script>
+    <script src="js/tokenDetector.js"></script>
+    <script src="js/scorer.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
