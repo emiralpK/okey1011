@@ -1,3 +1,4 @@
+> ℹ️ **Disclaimer:** This project was developed with AI assistance for educational purposes.
 # Gelişmiş Assembly IDE
 
 Kendi derleyicisi ve sanal makinesi bulunan modern, gelişmiş bir Assembly geliştirme ortamı.
